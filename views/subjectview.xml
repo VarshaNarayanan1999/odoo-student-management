@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record model="ir.ui.view" id="subject_treeview">
+        <field name="name">subject.table.tree</field>
+        <field name="model">subject.table</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="subject_name"/>
+<!--                <field name="dob"/>-->
+<!--                <field name="age"/>-->
+
+
+            </tree>
+        </field>
+    </record>
+    <record model="ir.ui.view" id="subject_formview">
+        <field name="name">subject.table.form</field>
+        <field name="model">subject.table</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+
+                        <group>
+                            <field name="subject_name"/>
+<!--                            <field name="dob"/>-->
+
+
+                        </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record model="ir.actions.act_window" id="subject_action">
+        <field name="name">subject</field>
+        <field name="res_model">subject.table</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+</odoo>

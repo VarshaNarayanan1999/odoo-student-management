@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record model="ir.ui.view" id="teacher_treeview">
+        <field name="name">teacher.table.tree</field>
+        <field name="model">teacher.table</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="teacher_name"/>
+                <field name="stu_teacher_ids"/>
+                <field name="gender"/>
+
+                <field name="s_teach_id"/>
+                <field name="teach_sub_id"/>
+                <field name="student_age"/>
+                <field name="teacher_middle_name"/>
+
+                <!--                <field name="st_age"/>-->
+
+            </tree>
+        </field>
+    </record>
+    <record model="ir.ui.view" id="teacher_formview">
+        <field name="name">teacher.table.form</field>
+        <field name="model">teacher.table</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button id="action_createthe_student" name="%(studentdatas.action_createthe_student)d"
+                            string="your opinions" type="action" class="btn-primary"/>
+
+                    
+                </header>
+                <sheet>
+                    <field name="image" widget="image" class="oe_avatar"/>
+
+                    <group>
+                        <group>
+                            <field name="teacher_name"/>
+                            <field name="student_age"/>
+                            <field name="teacher_middle_name"/>
+
+                            <!--                            <field name="gender"/>-->
+
+                            <field name="teach_sub_id"/>
+                            <field name="gender"/>
+                            <field name="s_teach_id"/>
+                            <field name="student_count"/>
+                            <!--                            <field name="st_age"/>-->
+                            <!--                            <field name="stu_teacher_ids"/>-->
+                        </group>
+                        <group>
+                            <field name="stu_teacher_ids">
+                                <tree editable="bottom">
+
+                                    <field name="name"/>
+                                    <field name="gender"/>
+                                    <field name="subj_ids" widget="many2many_tags"/>
+                                    <field name="student_age"/>
+
+
+                                    <field name="idn_id" invisible="1"/>
+
+
+                                </tree>
+                            </field>
+
+                        </group>
+
+                    </group>
+
+
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="student_view_pivot" model="ir.ui.view">
+        <field name="name">teacher.table.pivot</field>
+        <field name="model">teacher.table</field>
+
+        <field name="arch" type="xml">
+            <pivot string="teachers">
+                <field name="student_count" type="row"/>
+                <field name="teacher_name" type="col"/>
+
+            </pivot>
+        </field>
+    </record>
+     <record id="view_teacher_kanban" model="ir.ui.view">
+        <field name="name">teachers.kanban</field>
+        <field name="model">teacher.table</field>
+        <field name="arch" type="xml">
+            <kanban>
+                <field name="teacher_name"/>
+                <field name="teacher_middle_name"/>
+                <field name="student_age"/>
+                <field name="gender"/>
+
+                <templates>
+                    <t t-name="kanban-box">
+                        <div t-attf-class="oe_kanban_global_click">
+                            <div class="o_kanban_image">
+                                <field name="image" widget="image" class="oe_avatar"/>
+
+                            </div>
+
+                            <div class="oe_kanban_details">
+                                <ul>
+                                    <li>
+                                        Name:
+
+                                        <field name="teacher_name"/>
+
+
+                                    </li>
+                                       <li>
+                                        <field name="teacher_middle_name"/>
+
+                                    </li>
+
+                                    <li>
+                                        <field name="student_age"/>
+
+
+                                    </li>
+                                    <li>
+                                        <field name="gender"/>
+
+                                    </li>
+
+
+
+
+                                </ul>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="teacher_action">
+        <field name="name">teachers</field>
+        <field name="res_model">teacher.table</field>
+        <field name="view_mode">tree,form,pivot,kanban</field>
+    </record>
+</odoo>

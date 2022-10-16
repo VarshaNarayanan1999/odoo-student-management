@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record model="ir.ui.view" id="student_treeview">
+        <field name="name">student.table.tree</field>
+        <field name="model">student.table</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <!--                <field name="age"/>-->
+                <field name="gender"/>
+                <field name="idn_id"/>
+                <field name="student_age"/>
+                <field name="subj_ids"/>
+                <field name="dob"/>
+                <field name="mark1"/>
+                <field name="mark2"/>
+<!--                <field name="leaving"/>-->
+                <field name="leaving"/>
+<!--                <field name="total"/>-->
+
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="ma_fe_action">
+        <field name="name">genderclasstion</field>
+        <field name="res_model">student.table</field>
+        <field name="view_mode">tree</field>
+        <field name="domain">[('gender', '=', 'male')]</field>
+    </record>
+
+
+</odoo>

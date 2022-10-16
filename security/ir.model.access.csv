@@ -1,0 +1,11 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_student_table,access.student.table,model_student_table,,1,1,1,1
+access_teacher_table,access.teacher.table,model_teacher_table,,1,1,1,1
+access_subject_table,access.subject.table,model_subject_table,,1,1,1,1
+access_create_student_wizard,access.create.student.wizard,model_create_student_wizard,,1,1,1,1
+access_createthe_student_wizard,access.createthe.student.wizard,model_createthe_student_wizard,,1,1,1,1
+access_the_wizard,access.the.wizard,model_the_wizard,,1,1,1,1
+
+
+
+

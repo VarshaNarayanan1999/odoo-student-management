@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record model="ir.ui.view" id="student_treeview">
+        <field name="name">student.table.tree</field>
+        <field name="model">student.table</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="student_age"/>
+                <field name="gender"/>
+                <field name="idn_id"/>
+                <field name="subj_ids"/>
+                <field name="dob"/>
+                <field name="mark1"/>
+                <field name="mark2"/>
+                <field name="leaving"/>
+
+            </tree>
+        </field>
+    </record>
+
+
+    <record model="ir.ui.view" id="student_formview">
+        <field name="name">student.table.form</field>
+        <field name="model">student.table</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <!--                    <field name="state" widget="statusbar" options="{'clickable':'1'}"/>-->
+                    <field name="state" widget="statusbar"/>
+                    <button id="button_submit" name="action_submit" string="submit" type="object" class="btn-primary"
+                            states="draft"/>
+                    <button id="button_draft" name="action_draft" string="set to draft" type="object"
+                            class="btn-primary" states="submit"/>
+<!--                    <button id="action_createthe_student" name="%(studentdatas.action_createthe_student)d"-->
+<!--                            string="your opinion" type="action" class="btn-primary"/>-->
+                    <button id="action_email_gen" name="%(studentdatas.action_email_gen)d"
+                            string="your opinions" type="action" class="btn-danger"/>
+
+
+
+
+                </header>
+
+                <sheet>
+                    <field name="image" widget="image" class="oe_avatar"/>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="reference"/>
+
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+
+                            <field name="name"/>
+                            <field name="gender"/>
+                            <!--                            <field name="subj_ids"  widget="many2many_tags"/>-->
+                            <field name="subj_ids" widget="many2many_checkboxes"/>
+
+
+                        </group>
+
+
+                        <group>
+                            <field name="student_age"/>
+                            <field name="idn_id"/>
+                            <field name="dob"/>
+                            <field name="mark1"/>
+                            <field name="mark2"/>
+                            <field name="leaving"/>
+
+
+                        </group>
+                    </group>
+
+
+                </sheet>
+
+
+            </form>
+        </field>
+    </record>
+    <record id="view_search" model="ir.ui.view">
+        <field name="name">view.search.student</field>
+        <field name="model">student.table</field>
+        <field name="arch" type="xml">
+            <search string="students">
+                <field name="name"/>
+                <field name="student_age"/>
+
+
+                <separator/>
+                <filter string="archived" name="state" domain="[('state','=','remove')]"/>
+
+
+                <group expand="0" string="Group By">
+
+
+                    <filter name="gender" string="gender" context="{'group_by': 'gender'}"/>
+                    <filter name="name" string="Name" context="{'group_by': 'name'}"/>
+                </group>
+                <!--                <searchpanel>-->
+                <!--                    <field name="company_id" groups="base.group_multi_company" icon="fa-building" enable_counters="1"/>-->
+                <!--                    <field name="department_id" icon="fa-users" enable_counters="1"/>-->
+                <!--                </searchpanel>-->
+            </search>
+        </field>
+    </record>
+    <record id="student_view_pivot" model="ir.ui.view">
+        <field name="name">student.table.pivot</field>
+        <field name="model">student.table</field>
+
+        <field name="arch" type="xml">
+            <pivot string="student">
+                <field name="idn_id" type="row"/>
+                <field name="student_age" type="col"/>
+
+
+            </pivot>
+        </field>
+    </record>
+    <record id="student_calender_view" model="ir.ui.view">
+        <field name="name">student.view.cal</field>
+        <field name="model">student.table</field>
+        <field name="arch" type="xml">
+            <calendar string="appointment_calender" date_start="dob" color="student_age" mode="month" quick_add="False">
+                <field name="name"/>
+                <field name="student_age"/>
+                <field name="gender"/>
+            </calendar>
+        </field>
+    </record>
+    <record id="student_graph_view" model="ir.ui.view">
+        <field name="name">student.graph</field>
+        <field name="model">student.table</field>
+        <field name="arch" type="xml">
+            <graph string="students">
+
+                <field name="gender"/>
+            </graph>
+        </field>
+    </record>
+    <record id="view_student_kanban" model="ir.ui.view">
+        <field name="name">students.kanban</field>
+        <field name="model">student.table</field>
+        <field name="arch" type="xml">
+            <kanban>
+                <field name="name"/>
+                <field name="student_age"/>
+                <field name="gender"/>
+                <field name="idn_id"/>
+                <field name="subj_ids"/>
+                <field name="dob"/>
+                <field name="leaving"/>
+
+                <templates>
+                    <t t-name="kanban-box">
+                        <div t-attf-class="oe_kanban_global_click">
+                            <div class="o_kanban_image">
+                                <field name="image" widget="image" class="oe_avatar"/>
+
+                            </div>
+
+                            <div class="oe_kanban_details">
+                                <ul>
+                                    <li>
+                                        Name:
+                                        <field name="name"/>
+
+
+                                    </li>
+
+                                    <li>
+                                        <field name="student_age"/>
+
+
+                                    </li>
+                                    <li>
+                                        <field name="gender"/>
+
+                                    </li>
+                                    <li>
+                                        <field name="subj_ids"/>
+
+                                    </li>
+                                    <li>
+                                        <field name="dob"/>
+
+                                    </li>
+
+
+                                </ul>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+    <record model="ir.actions.act_window" id="student_action">
+        <field name="name">students</field>
+        <field name="res_model">student.table</field>
+        <field name="view_mode">tree,form,search,pivot,calendar,graph,kanban</field>
+
+
+    </record>
+
+
+</odoo>

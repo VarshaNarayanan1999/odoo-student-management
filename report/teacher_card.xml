@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="report_teachers_id_card">
+        <div class="page" style="text-align: center;">
+            <div class="header" style="text-align:center;border:3px; background-color:#CC0000;">
+                <h2>TEACHER DETAILS</h2>
+
+            </div>
+            <div class="article">
+                <t t-set="val" t-value="doc.get_per()"/>
+
+                <p>Teachername:
+                    <span t-field="doc.teacher_name"></span>
+                </p>
+
+
+                <img t-att-src="image_data_uri(doc.image)"
+                     t-if="doc.image"
+                     alt="Image is not loading"
+                     height="100" width="100"/>
+
+                <img src="/studentdatas/static/description/a3.jpg"
+                     t-if="not doc.image"
+                     alt="Image not loading"
+                     height="100" width="100"/>
+
+
+                <br/>
+                <br/>
+                <div>
+                    <table width="60%">
+                        <thead>
+
+                            <tr>
+                                <th>Teacher_middle_name</th>
+                                <th>Gender</th>
+                                <th>Student count</th>
+
+                            </tr>
+                            <tr style="text-align:center;border:1px;solid-black">
+                                <!--                                <t t-foreach="docs" t-as="doc">-->
+                                <td>
+                                    <span t-field="doc.teacher_middle_name"></span>
+                                </td>
+
+                                <td>
+                                    <span t-field="doc.gender"></span>
+                                </td>
+
+                                <td>
+                                    <span t-field="doc.student_count"></span>
+                                </td>
+
+                                <!--                                </t>-->
+                            </tr>
+                        </thead>
+                    </table>
+                    <br/>
+                    <br/>
+                </div>
+                <h4 style="text-align:center;">STUDENT DETAILS</h4>
+                <div>
+                    <table width="100%" height="100%">
+                        <tr style="text-align:center;border:2px;background-color:#ffccff;solid-black">
+                            <th>Students of teacher</th>
+                            <th>students gender</th>
+                            <th>students Age</th>
+
+
+                        </tr>
+
+                        <tr style="text-align:center;border:2px;background-color:blue;solid-black"
+                            t-foreach='doc.stu_teacher_ids' t-as='doc'>
+
+                            <td>
+                                <span t-field="doc.name"></span>
+                            </td>
+                            <td>
+                                <span t-field="doc.gender"></span>
+                            </td>
+                            <td>
+                                <span t-field="doc.student_age"></span>
+                            </td>
+
+                        </tr>
+
+
+                    </table>
+
+                </div>
+                <br/>
+                <p>
+                    Maximum number of students are 10
+                </p>
+
+                <p>percentage of students -<span t-esc="val"/>%
+
+                </p>
+
+
+            </div>
+
+        </div>
+
+    </template>
+    <template id="report_teachers_id_card1">
+        <t t-call="web.html_container">
+            <!--            <t t-call="web.external_layout">-->
+            <t t-foreach="docs" t-as="doc">
+
+                <t t-call="studentdatas.report_teachers_id_card"/>
+
+            </t>
+        </t>
+        <!--        </t>-->
+    </template>
+
+
+</odoo>
+
